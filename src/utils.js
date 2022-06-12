@@ -19,12 +19,7 @@ function getDirname(importMetaUrl) {
  * @returns {Boolean}
  */
 const checkPathIsAllowed = (fullPath) => {
-    const homeDir = os.homedir();
-    if (fullPath.startsWith(homeDir)) {
-        return true
-    } else {
-        return false
-    }
+    return true
 };
 
 
