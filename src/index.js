@@ -12,6 +12,7 @@ import { remove } from './fs/remove.js';
 import { calculateHash } from './calcHash.js';
 import { compress } from './zip/compress.js';
 import { decompress } from './zip/decompress.js';
+import { getOsInfo } from './getOsOnfo.js';
 
 const __dirname = getDirname(import.meta.url);
 const homeDir = os.homedir();
@@ -90,8 +91,11 @@ stdin.on('data', async (chunk) => {
     // decompress path_to_file path_to_destination
     await decompress(workingDirectory, operationArgs[0], operationArgs[1]);
 
+  } else if (operation === 'os') {
+    // os
+    getOsInfo(operationArgs[0]);
+
   } else {
-    // let result = await processOperaton();
     stdout.write(`Вы ввели существующую команду: ${operation}\n`);
   }
   stdout.write(`You are currently in ${workingDirectory}\n`);
