@@ -9,6 +9,7 @@ import { add } from './fs/add.js';
 import { rn } from './fs/rename.js';
 import { cp } from './fs/cp.js';
 import { remove } from './fs/remove.js';
+import { calculateHash } from './calcHash.js';
 
 const __dirname = getDirname(import.meta.url);
 const homeDir = os.homedir();
@@ -75,10 +76,13 @@ stdin.on('data', async (chunk) => {
     //cp path_to_file path_to_new_directory
     await remove(workingDirectory, operationArgs[0]);
 
+  } else if (operation === 'hash') {
+    //hash path_to_file
+    await calculateHash(workingDirectory, operationArgs[0]);
+
   } else {
     // let result = await processOperaton();
     stdout.write(`Вы ввели существующую команду: ${operation}\n`);
-    stdout.write(`You are currently in ${workingDirectory}\n`);
   }
   stdout.write(`You are currently in ${workingDirectory}\n`);
 
