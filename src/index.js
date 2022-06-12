@@ -10,6 +10,8 @@ import { rn } from './fs/rename.js';
 import { cp } from './fs/cp.js';
 import { remove } from './fs/remove.js';
 import { calculateHash } from './calcHash.js';
+import { compress } from './zip/compress.js';
+import { decompress } from './zip/decompress.js';
 
 const __dirname = getDirname(import.meta.url);
 const homeDir = os.homedir();
@@ -78,7 +80,15 @@ stdin.on('data', async (chunk) => {
 
   } else if (operation === 'hash') {
     //hash path_to_file
-    await calculateHash(workingDirectory, operationArgs[0]);
+    await calculateHash(workingDirectory, operationArgs[0], operationArgs[1]);
+
+  } else if (operation === 'compress') {
+    // compress path_to_file path_to_destination
+    await compress(workingDirectory, operationArgs[0], operationArgs[1]);
+
+  } else if (operation === 'decompress') {
+    // decompress path_to_file path_to_destination
+    await decompress(workingDirectory, operationArgs[0], operationArgs[1]);
 
   } else {
     // let result = await processOperaton();
