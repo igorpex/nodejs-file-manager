@@ -16,10 +16,11 @@ export const list = async (workingDirectory) => {
       .filter(dirent => dirent.isDirectory())
       .map(dir => dir.name);
 
-    console.log('\x1b[36m', 'FILES:', '\x1b[0m')
-    files.forEach(name => console.log('\x1b[32m', name, '\x1b[0m'));
     console.log('\x1b[36m', 'FOLDERS:', '\x1b[0m')
     folders.forEach(name => console.log('\x1b[42m', name, '\x1b[40m'));
+    console.log('\x1b[36m', 'FILES:', '\x1b[0m')
+    files.forEach(name => console.log('\x1b[32m', name, '\x1b[0m'));
+
   } catch (e) {
     if (e.code === 'ENOENT') {
       throw new Error("Operation failed: no such directory");
